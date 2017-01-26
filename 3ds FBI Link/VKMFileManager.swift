@@ -10,9 +10,14 @@ import Foundation
 import Cocoa
 import GCDWebServer
 
+protocol VKMLoggingDelegate {
+    func logStatus(_ status:String) -> (Void)
+}
+
 @objc(VKMFileManager)
 class VKMFileManager: NSObject, VKMFileDropDelegate {
     var dataArray:[VKMFileManagerItem] = [VKMFileManagerItem]()
+    public var delegate: VKMLoggingDelegate?
     public var webServer: GCDWebServer = GCDWebServer()
     override init() {
         //Set up our web server paths. They will automatically handle changes in the file list later.
@@ -31,12 +36,14 @@ class VKMFileManager: NSObject, VKMFileDropDelegate {
             (request, completionBlock) in
             var foundItem:VKMFileManagerItem?
             let matchPath = request?.path
+            self.delegate?.logStatus("Sending \(matchPath!).\n")
             var response: GCDWebServerFileResponse
             if let i = self.dataArray.index(where: { $0.clientURL?.path == matchPath }) {
                 foundItem = self.dataArray[i]
-                print("\(self.dataArray[i].path) is a match!")
+//                self.delegate?.logStatus("Sending \(self.dataArray[i].fileName).\n")
                 response = GCDWebServerFileResponse(file: foundItem?.path, isAttachment: true)
             } else {
+                self.delegate?.logStatus("Error: Console asked for a file that was not added.\n")
                 response = GCDWebServerFileResponse(statusCode: 404)
             }
             completionBlock!(response)
@@ -45,7 +52,6 @@ class VKMFileManager: NSObject, VKMFileDropDelegate {
     
     func received(files: [String]) {
         self.willChangeValue(forKey: "dataArray")
-        print("got files \(files)")
         let fd = FileManager.default
         var newFiles = [String]()
         for file in files {
@@ -77,17 +83,21 @@ class VKMFileManager: NSObject, VKMFileDropDelegate {
         self.didChangeValue(forKey: "dataArray")
     }
     
+    internal func received(url: URL) {
+        self.willChangeValue(forKey: "dataArray")
+        dataArray.append(VKMFileManagerItem(isUrl: true, path: url.absoluteString))
+        self.didChangeValue(forKey: "dataArray")
+    }
+    
     func startServing() -> Bool {
-        self.willChangeValue(forKey: "webServer")
+        NSLog("Hi")
         self.webServer.start(withPort: 0, bonjourName: "3DS FBI Link")
-        self.didChangeValue(forKey: "webServer")
+        self.delegate?.logStatus("You can inspect the files list at \(webServer.serverURL)\n")
         return true
     }
     
     func stopServing() -> Bool {
-        self.willChangeValue(forKey: "webServer")
-        self.webServer.stop()
-        self.didChangeValue(forKey: "webServer")
+        if self.webServer.isRunning { self.webServer.stop() }
         return true
     }
 }
@@ -104,17 +114,43 @@ class VKMFileManagerItem : NSObject {
         let fd = FileManager.default
         self.isUrl = isUrl
         var fileSize = 0
-        do {
-            let attr = try fd.attributesOfItem(atPath: path)
-            fileSize = attr[FileAttributeKey.size] as! Int
-        } catch {
-            print(error)
+        if !self.isUrl {
+            do {
+                let attr = try fd.attributesOfItem(atPath: path)
+                fileSize = attr[FileAttributeKey.size] as! Int
+            } catch {
+                print(error)
+            }
+            NSLog("Fmgr path \(path)")
+            if #available(OSX 10.12, *) {
+                let tempURL = URL(fileURLWithPath: path)
+                self.fileName = tempURL.lastPathComponent
+                self.clientURL = URL(string: "/\(tempURL.pathComponents.suffix(2).joined(separator: "/"))")
+                self.clientURL = URL(string: path)
+                self.fileName = (clientURL?.lastPathComponent)!
+
+            } else { //URL isn't really available on 10.11 and earlier. Can we hack something together?
+                let tempURL = NSURL(fileURLWithPath: path)
+                NSLog("FMgr tempURL \(tempURL)")
+                NSLog("FMgr tempURL absString \(tempURL.absoluteString)")
+                NSLog("FMgr tempURL relString \(tempURL.relativeString)")
+                NSLog("FMgr tempURL absPath \(tempURL.absoluteURL?.absoluteString)")
+                NSLog("FMgr tempURL relPath \(tempURL.relativePath)")
+                self.fileName = (tempURL.lastPathComponent)!
+                let pathComponents = (tempURL.pathComponents)!
+                NSLog("Fmgr pathComponents \(pathComponents)")
+                let clientURLString = "/\(pathComponents[pathComponents.count-1])"
+                NSLog("Fmgr clientURLString %@", clientURLString)
+                let clientNSURL = NSURL(string: clientURLString, relativeTo: NSURL(string: "file://") as URL?)
+                NSLog("Fmgr Client NSURL \(clientNSURL)")
+                self.clientURL = (clientNSURL as! URL)
+                NSLog("FMgr clientURL \(self.clientURL)")
+            }
+            self.path = path
+            self.size = fileSize
+        } else {
+            self.path = path
         }
-        let tempURL = URL(fileURLWithPath: path)
-        self.fileName = tempURL.lastPathComponent
-        self.path = path
-        self.size = fileSize
-        self.clientURL = URL(string: "/\(tempURL.pathComponents.suffix(2).joined(separator: "/"))");
     }
 }
 

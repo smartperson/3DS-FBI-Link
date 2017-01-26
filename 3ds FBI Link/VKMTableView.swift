@@ -13,27 +13,16 @@ import Cocoa
 class VKMTableView: NSTableView {
     @IBOutlet weak var relatedArrayController:NSArrayController?
     
-    required init?(coder:NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    override func keyDown(with event: NSEvent) {
-        let keyInput = NSString(string: event.charactersIgnoringModifiers!)
-        let key = keyInput.character(at: 0) //keyInput?.substring(to: (keyInput?.index(after: (keyInput?.startIndex)!))!).characters.first
-        if(Int(key) == NSDeleteCharacter) {
-            if self.selectedRow == -1 {
-                NSBeep()
-            }
-            let hasDelegate = self.window?.firstResponder.responds(to: #selector(getter: delegate))
-            let isEditing = (hasDelegate! && (self.window?.firstResponder.isKind(of: NSText.self))! &&
-                ((self.window?.firstResponder.perform(#selector(getter: delegate)).takeRetainedValue() as? NSObject)?.isKind(of: VKMTableView.self))! )
-            if (!isEditing)
-            {
-                relatedArrayController?.remove(self)
-                return;
-            }
-
+    override func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
+        let action = item.action!
+        if (action == #selector(delete)) {
+            if (self.selectedRow >= 0) {return true}
+            else {return false}
+        } else {
+            return super.validateUserInterfaceItem(item)
         }
-        super.keyDown(with: event)
+    }
+    func delete(_ sender: Any?) {
+        relatedArrayController?.remove(self)
     }
 }

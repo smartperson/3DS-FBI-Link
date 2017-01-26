@@ -12,6 +12,8 @@ import CocoaAsyncSocket
 
 protocol ConsoleManagementDelegate {
     func socketsDisconnected() -> Void
+    func foundConsoleWith(consoleManagerItem: ConsoleManagerItem) -> Void
+    func connectedToConsole(_ console:ConsoleManagerItem) -> Void
 }
 
 @objc(ConsoleManagerItem)
@@ -95,18 +97,28 @@ class VKMConsoleManager: NSObject, GCDAsyncSocketDelegate, NSTableViewDataSource
     }
     
     public func sendData(fileList: [VKMFileManagerItem], hostURL: URL) {
+        NSLog("At start of ConsoleManager sendData")
         var dataPayload = Data()
         var urlData = Data()
+        NSLog("102")
         for fileItem in fileList {
             var singleURL:URL
             if (fileItem.isUrl) {
                 singleURL = (fileItem.clientURL)!
+                NSLog("singleURL \(fileItem.clientURL)")
             } else {
                 let urlString = fileItem.clientURL?.absoluteString
+                NSLog("urlString \(urlString)")
+                NSLog("urlString \(fileItem.clientURL?.relativeString)")
+                NSLog("urlString \(fileItem.clientURL?.path)")
+                NSLog("urlString \(fileItem.clientURL?.relativePath)")
                 let index = urlString?.index(after: (urlString?.startIndex)!)
+                print("index \(index)")
                 singleURL = hostURL.appendingPathComponent((urlString?.substring(from: index!))!)
+                NSLog("singleURL \(singleURL)")
             }
             urlData.append((singleURL.absoluteString+"\n").data(using: String.Encoding.utf8)!)
+            NSLog("urlData length \(urlData.count)")
         }
         // var newData = Data(bytes: &urlDataCount, count: 4)
         var urlDataCount:UInt32 = UInt32(urlData.count).bigEndian //need to be encoded for network (big endian)
@@ -114,7 +126,7 @@ class VKMConsoleManager: NSObject, GCDAsyncSocketDelegate, NSTableViewDataSource
         dataPayload.append(urlData)
         for consoleManagerItem in dataArray {
             do {
-                var socket = GCDAsyncSocket()
+                let socket = GCDAsyncSocket()
                 socket.setDelegate(self, delegateQueue: DispatchQueue.main)
                 try socket.connect(toHost: consoleManagerItem.ipAddress, onPort: consoleManagerItem.port)
                 socket.write(dataPayload as Data, withTimeout: 2000, tag: 0)
@@ -128,6 +140,9 @@ class VKMConsoleManager: NSObject, GCDAsyncSocketDelegate, NSTableViewDataSource
     }
     
     @objc public func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
+        delegate?.connectedToConsole(dataArray.first { item in
+            return item.ipAddress == host
+        }!)
     }
     
     @objc public func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
