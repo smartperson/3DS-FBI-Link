@@ -595,6 +595,7 @@ CA
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <action selector="resetStatusWithSender:" target="XfG-lQ-9wD" id="BA9-nm-iaa"/>
                                     <binding destination="w8C-Mg-imx" name="enabled" keyPath="selection.running" id="9Sg-fw-mLM">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSNegateBoolean</string>
@@ -667,12 +668,12 @@ CA
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="MNd-pG-dws" userLabel="Console Manager" customClass="VKMConsoleManager"/>
                 <customObject id="43i-kr-Ecb" userLabel="File Manager" customClass="VKMFileManager"/>
-                <arrayController objectClassName="VKMFileManagerItem" alwaysUsesMultipleValuesMarker="YES" id="XsN-aL-QH1" userLabel="File Array Controller">
+                <arrayController objectClassName="VKMFileManagerItem" id="XsN-aL-QH1" userLabel="File Array Controller">
                     <connections>
                         <binding destination="43i-kr-Ecb" name="contentArray" keyPath="dataArray" id="Mdj-KA-dPE"/>
                     </connections>
                 </arrayController>
-                <arrayController objectClassName="ConsoleManagerItem" automaticallyPreparesContent="YES" id="y2T-8k-T3v" userLabel="Console Array Controller">
+                <arrayController objectClassName="ConsoleManagerItem" id="y2T-8k-T3v" userLabel="Console Array Controller">
                     <connections>
                         <binding destination="MNd-pG-dws" name="contentArray" keyPath="dataArray" id="hNu-CQ-i3k"/>
                     </connections>

@@ -69,8 +69,8 @@ class VKMConsoleManager: NSObject, GCDAsyncSocketDelegate, NSTableViewDataSource
         
         let ipMatches = matches(for: ipPattern, in: output!)
         let macMatches = matches(for: macPattern, in: output!)
-        print(ipMatches)
-        print(macMatches)
+//        print(ipMatches)
+//        print(macMatches)
         for (index, macMatch) in macMatches.enumerated() {
             var cleanedMAC = macMatch
             cleanedMAC.remove(at: cleanedMAC.startIndex)
@@ -80,7 +80,7 @@ class VKMConsoleManager: NSObject, GCDAsyncSocketDelegate, NSTableViewDataSource
                 self.didChangeValue(forKey: "dataArray")
             }
         }
-        print(output!)
+//        print(output!)
     }
 
     func matches(for regex: String, in text: String) -> [String] {

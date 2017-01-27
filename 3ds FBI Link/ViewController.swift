@@ -92,5 +92,13 @@ class ViewController: NSViewController, ConsoleManagementDelegate, VKMLoggingDel
         consoleManager?.sendData(fileList: (fileManager?.dataArray)!, hostURL: (fileManager?.webServer.serverURL)!)
         self.status.setValue("Stop", forKey: "actionTitle")
     }
+    
+    @IBAction func resetStatus(sender: AnyObject) {
+        fileManager?.dataArray.removeAll()
+        fileManager?.received(files: []) //not beautiful, but triggers any needed bindings updates
+        consoleManager?.dataArray.removeAll()
+        consoleManager?.detectConsoles(sender: self)
+        logView.textStorage?.mutableString.setString("<reset>\n")
+    }
 }
 
