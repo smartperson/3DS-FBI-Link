@@ -44,4 +44,4 @@ Testing on old 3DS consoles would also be helpful. I have no reason to believe i
 ## Credits
 * miltoncandelero for the clever idea on autodetecting 3DS consoles on the LAN, used in [Boop](https://github.com/miltoncandelero/Boop).
 * Steveice10 for creating and maintaining the incomparable [FBI](https://github.com/Steveice10/FBI).
-* The rest of the 3dshacks community, who both build important, exciting stuff below this and above it. Your dedication is an inspiration.
+* The rest of the 3dshacks community, who  build important, exciting stuff below this layer and above it. Your dedication is an inspiration.
