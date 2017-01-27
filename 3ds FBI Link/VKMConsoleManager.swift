@@ -97,28 +97,28 @@ class VKMConsoleManager: NSObject, GCDAsyncSocketDelegate, NSTableViewDataSource
     }
     
     public func sendData(fileList: [VKMFileManagerItem], hostURL: URL) {
-        NSLog("At start of ConsoleManager sendData")
+//        NSLog("At start of ConsoleManager sendData")
         var dataPayload = Data()
         var urlData = Data()
-        NSLog("102")
+//        NSLog("102")
         for fileItem in fileList {
             var singleURL:URL
             if (fileItem.isUrl) {
                 singleURL = (fileItem.clientURL)!
-                NSLog("singleURL \(fileItem.clientURL)")
+//                NSLog("singleURL \(fileItem.clientURL)")
             } else {
                 let urlString = fileItem.clientURL?.absoluteString
-                NSLog("urlString \(urlString)")
-                NSLog("urlString \(fileItem.clientURL?.relativeString)")
-                NSLog("urlString \(fileItem.clientURL?.path)")
-                NSLog("urlString \(fileItem.clientURL?.relativePath)")
+//                NSLog("urlString \(urlString)")
+//                NSLog("urlString \(fileItem.clientURL?.relativeString)")
+//                NSLog("urlString \(fileItem.clientURL?.path)")
+//                NSLog("urlString \(fileItem.clientURL?.relativePath)")
                 let index = urlString?.index(after: (urlString?.startIndex)!)
-                print("index \(index)")
+//                print("index \(index)")
                 singleURL = hostURL.appendingPathComponent((urlString?.substring(from: index!))!)
-                NSLog("singleURL \(singleURL)")
+//                NSLog("singleURL \(singleURL)")
             }
             urlData.append((singleURL.absoluteString+"\n").data(using: String.Encoding.utf8)!)
-            NSLog("urlData length \(urlData.count)")
+//            NSLog("urlData length \(urlData.count)")
         }
         // var newData = Data(bytes: &urlDataCount, count: 4)
         var urlDataCount:UInt32 = UInt32(urlData.count).bigEndian //need to be encoded for network (big endian)
@@ -159,13 +159,12 @@ class VKMConsoleManager: NSObject, GCDAsyncSocketDelegate, NSTableViewDataSource
     }
     
     @objc public func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
-        print("Wrote data with tag \(tag)")
+//        print("Wrote data with tag \(tag)")
     }
     
     @objc public func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {
         //getting 1 byte back from console means it's done and we should disconnect
         sock.disconnectAfterReadingAndWriting()
     }
-    //@IBOutlet weak var consoleTable: NSTableView?
     
 }

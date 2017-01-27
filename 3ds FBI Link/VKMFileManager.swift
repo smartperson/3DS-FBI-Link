@@ -35,7 +35,7 @@ class VKMFileManager: NSObject, VKMFileDropDelegate {
         webServer.addHandler(forMethod: "GET", pathRegex: "/(.)+", request: GCDWebServerRequest.self) {
             (request, completionBlock) in
             var foundItem:VKMFileManagerItem?
-            let matchPath = request?.path
+            let matchPath = request?.path.removingPercentEncoding!
             self.delegate?.logStatus("Sending \(matchPath!).\n")
             var response: GCDWebServerFileResponse
             if let i = self.dataArray.index(where: { $0.clientURL?.path == matchPath }) {
@@ -121,35 +121,36 @@ class VKMFileManagerItem : NSObject {
             } catch {
                 print(error)
             }
-            NSLog("Fmgr path \(path)")
-            if #available(OSX 10.12, *) {
+//            NSLog("Fmgr path \(path)")
+            if #available(OSX 10.10, *) {
                 let tempURL = URL(fileURLWithPath: path)
                 self.fileName = tempURL.lastPathComponent
-                self.clientURL = URL(string: "/\(tempURL.pathComponents.suffix(2).joined(separator: "/"))")
-                self.clientURL = URL(string: path)
-                self.fileName = (clientURL?.lastPathComponent)!
+                let usedPath = "/"+tempURL.pathComponents.suffix(2).map{$0.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!}.joined(separator: "/")
+                self.clientURL = URL(string: usedPath);
 
             } else { //URL isn't really available on 10.11 and earlier. Can we hack something together?
-                let tempURL = NSURL(fileURLWithPath: path)
-                NSLog("FMgr tempURL \(tempURL)")
-                NSLog("FMgr tempURL absString \(tempURL.absoluteString)")
-                NSLog("FMgr tempURL relString \(tempURL.relativeString)")
-                NSLog("FMgr tempURL absPath \(tempURL.absoluteURL?.absoluteString)")
-                NSLog("FMgr tempURL relPath \(tempURL.relativePath)")
-                self.fileName = (tempURL.lastPathComponent)!
-                let pathComponents = (tempURL.pathComponents)!
-                NSLog("Fmgr pathComponents \(pathComponents)")
-                let clientURLString = "/\(pathComponents[pathComponents.count-1])"
-                NSLog("Fmgr clientURLString %@", clientURLString)
-                let clientNSURL = NSURL(string: clientURLString, relativeTo: NSURL(string: "file://") as URL?)
-                NSLog("Fmgr Client NSURL \(clientNSURL)")
-                self.clientURL = (clientNSURL as! URL)
-                NSLog("FMgr clientURL \(self.clientURL)")
+//                let tempURL = NSURL(fileURLWithPath: path)
+//                NSLog("FMgr tempURL \(tempURL)")
+//                NSLog("FMgr tempURL absString \(tempURL.absoluteString)")
+//                NSLog("FMgr tempURL relString \(tempURL.relativeString)")
+//                NSLog("FMgr tempURL absPath \(tempURL.absoluteURL?.absoluteString)")
+//                NSLog("FMgr tempURL relPath \(tempURL.relativePath)")
+//                self.fileName = (tempURL.lastPathComponent)!
+//                let pathComponents = (tempURL.pathComponents)!
+//                NSLog("Fmgr pathComponents \(pathComponents)")
+//                let clientURLString = "/\(pathComponents[pathComponents.count-1])"
+//                NSLog("Fmgr clientURLString %@", clientURLString)
+//                let clientNSURL = NSURL(string: clientURLString, relativeTo: NSURL(string: "file://") as URL?)
+//                NSLog("Fmgr Client NSURL \(clientNSURL)")
+//                self.clientURL = (clientNSURL as! URL)
+//                NSLog("FMgr clientURL \(self.clientURL)")
             }
             self.path = path
             self.size = fileSize
-        } else {
+        } else { //if it's a URL
+            self.fileName = (URL(string: path)?.lastPathComponent)!
             self.path = path
+            self.clientURL = URL(string:path)!
         }
     }
 }
