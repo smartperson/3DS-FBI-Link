@@ -32,6 +32,8 @@ I only have one 3DS, so while I'm pretty sure this will work for sending to mult
 For that or any other issues, help by opening cases on github. My Mac UI skills are rusty, so filing UI polish issues are also helpful.
 Seriously though, any issue, no matter how small: let me know!
 
+I'd like to make a proper Apple developer version, but my membership lapsed a while back. [Pitch in a few dollars](https://paypal.me/smartperson/5) if you'd like to help me get that up and running again.
+
 Testing on old 3DS consoles would also be helpful. I have no reason to believe it won't work, but I'd appreciate confirmation.
 
 
@@ -40,6 +42,7 @@ Testing on old 3DS consoles would also be helpful. I have no reason to believe i
 * Support for multiple network connections
 * Auto-updating or update checking functionality
 * Auto-scrolling the status field; other UI improvements.
+* Create a Apple developer-signed version, so it's easier to launch.
 
 ## Credits
 * miltoncandelero for the clever idea on autodetecting 3DS consoles on the LAN, used in [Boop](https://github.com/miltoncandelero/Boop).
