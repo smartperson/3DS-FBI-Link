@@ -36,6 +36,8 @@ I'd like to make a proper Apple developer version, but my membership lapsed a wh
 
 Testing on old 3DS consoles would also be helpful. I have no reason to believe it won't work, but I'd appreciate confirmation.
 
+## Build instructions
+I'm pretty sure you'll need macOS 10.12 and Xcode 8 to build, as code is written in Swift 3 and depends on macOS 10.12 additions. Also have [CocoaPods](https://cocoapods.org) installed and set up.
 
 ## To-dos & questions
 * More complete edge condition checking (emoji in filenames, connectivity checking)
