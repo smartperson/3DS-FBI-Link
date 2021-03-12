@@ -22,7 +22,7 @@ class VKMTableView: NSTableView {
             return super.validateUserInterfaceItem(item)
         }
     }
-    func delete(_ sender: Any?) {
+    @objc func delete(_ sender: Any?) {
         relatedArrayController?.remove(self)
     }
 }

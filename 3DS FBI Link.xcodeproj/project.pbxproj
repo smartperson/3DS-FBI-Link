@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6DE96D321F35516BBF4EF208 /* Pods_3DS_FBI_Link.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4910BA45DB7B2F8E60E31F /* Pods_3DS_FBI_Link.framework */; };
 		8B26BA7B1E328248005E2BFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B26BA7A1E328248005E2BFE /* AppDelegate.swift */; };
 		8B26BA7D1E328248005E2BFE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B26BA7C1E328248005E2BFE /* ViewController.swift */; };
 		8B26BA7F1E328248005E2BFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B26BA7E1E328248005E2BFE /* Assets.xcassets */; };
@@ -16,10 +17,10 @@
 		8B26BAEC1E32C40C005E2BFE /* VKMFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B26BAEB1E32C40C005E2BFE /* VKMFileManager.swift */; };
 		8B26BAEE1E330725005E2BFE /* VKMFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B26BAED1E330725005E2BFE /* VKMFullView.swift */; };
 		8B8E822E1E372673000AFEB3 /* VKMTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E822D1E372673000AFEB3 /* VKMTableView.swift */; };
-		F84F80AAD749B15C1C4E8A27 /* Pods_3ds_FBI_Link.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E55CDC8670F086BA30E65034 /* Pods_3ds_FBI_Link.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		049B0A33C200999741B012E2 /* Pods-3DS FBI Link.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3DS FBI Link.release.xcconfig"; path = "Pods/Target Support Files/Pods-3DS FBI Link/Pods-3DS FBI Link.release.xcconfig"; sourceTree = "<group>"; };
 		7E594DB3AD5CF1266A20E433 /* Pods-3ds FBI Link.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3ds FBI Link.debug.xcconfig"; path = "Pods/Target Support Files/Pods-3ds FBI Link/Pods-3ds FBI Link.debug.xcconfig"; sourceTree = "<group>"; };
 		8B26BA771E328248005E2BFE /* 3DS FBI Link.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "3DS FBI Link.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B26BA7A1E328248005E2BFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -33,8 +34,9 @@
 		8B26BAEB1E32C40C005E2BFE /* VKMFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VKMFileManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8B26BAED1E330725005E2BFE /* VKMFullView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKMFullView.swift; sourceTree = "<group>"; };
 		8B8E822D1E372673000AFEB3 /* VKMTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKMTableView.swift; sourceTree = "<group>"; };
+		8C4910BA45DB7B2F8E60E31F /* Pods_3DS_FBI_Link.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3DS_FBI_Link.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8D17C738F7D6AC56BFE28C /* Pods-3ds FBI Link.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3ds FBI Link.release.xcconfig"; path = "Pods/Target Support Files/Pods-3ds FBI Link/Pods-3ds FBI Link.release.xcconfig"; sourceTree = "<group>"; };
-		E55CDC8670F086BA30E65034 /* Pods_3ds_FBI_Link.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3ds_FBI_Link.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2051D55A975107609415EED /* Pods-3DS FBI Link.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3DS FBI Link.debug.xcconfig"; path = "Pods/Target Support Files/Pods-3DS FBI Link/Pods-3DS FBI Link.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F84F80AAD749B15C1C4E8A27 /* Pods_3ds_FBI_Link.framework in Frameworks */,
+				6DE96D321F35516BBF4EF208 /* Pods_3DS_FBI_Link.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +56,8 @@
 			children = (
 				7E594DB3AD5CF1266A20E433 /* Pods-3ds FBI Link.debug.xcconfig */,
 				AC8D17C738F7D6AC56BFE28C /* Pods-3ds FBI Link.release.xcconfig */,
+				C2051D55A975107609415EED /* Pods-3DS FBI Link.debug.xcconfig */,
+				049B0A33C200999741B012E2 /* Pods-3DS FBI Link.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -61,7 +65,7 @@
 		5730180BD2A6B10E4B37BE52 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E55CDC8670F086BA30E65034 /* Pods_3ds_FBI_Link.framework */,
+				8C4910BA45DB7B2F8E60E31F /* Pods_3DS_FBI_Link.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -124,7 +128,6 @@
 				8B26BA741E328247005E2BFE /* Frameworks */,
 				8B26BA751E328247005E2BFE /* Resources */,
 				6D29ADA4D4DB76875BBED150 /* [CP] Embed Pods Frameworks */,
-				86EFF110402E8E04691FE10B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -162,6 +165,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -195,13 +199,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-3DS FBI Link-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6D29ADA4D4DB76875BBED150 /* [CP] Embed Pods Frameworks */ = {
@@ -210,28 +217,18 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-3DS FBI Link/Pods-3DS FBI Link-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-3ds FBI Link/Pods-3ds FBI Link-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		86EFF110402E8E04691FE10B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-3ds FBI Link/Pods-3ds FBI Link-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-3DS FBI Link/Pods-3DS FBI Link-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -356,7 +353,7 @@
 		};
 		8B26BA871E328248005E2BFE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E594DB3AD5CF1266A20E433 /* Pods-3ds FBI Link.debug.xcconfig */;
+			baseConfigurationReference = C2051D55A975107609415EED /* Pods-3DS FBI Link.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
@@ -367,14 +364,14 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "VKM.-ds-FBI-Link";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.12;
-				SWIFT_VERSION = 3.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		8B26BA881E328248005E2BFE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC8D17C738F7D6AC56BFE28C /* Pods-3ds FBI Link.release.xcconfig */;
+			baseConfigurationReference = 049B0A33C200999741B012E2 /* Pods-3DS FBI Link.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
@@ -382,10 +379,11 @@
 				INFOPLIST_FILE = "3ds FBI Link/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "VKM.-ds-FBI-Link";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.12;
-				SWIFT_VERSION = 3.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

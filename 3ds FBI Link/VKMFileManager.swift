@@ -10,15 +10,16 @@ import Foundation
 import Cocoa
 import GCDWebServer
 
+ 
 protocol VKMLoggingDelegate {
     func logStatus(_ status:String) -> (Void)
 }
 
 @objc(VKMFileManager)
 class VKMFileManager: NSObject, VKMFileDropDelegate {
-    var dataArray:[VKMFileManagerItem] = [VKMFileManagerItem]()
+    @objc var dataArray:[VKMFileManagerItem] = [VKMFileManagerItem]()
     public var delegate: VKMLoggingDelegate?
-    public var webServer: GCDWebServer = GCDWebServer()
+    @objc public var webServer: GCDWebServer = GCDWebServer()
     override init() {
         //Set up our web server paths. They will automatically handle changes in the file list later.
         super.init()
@@ -30,23 +31,23 @@ class VKMFileManager: NSObject, VKMFileDropDelegate {
             }
             responseHTML.append("</table></p></body></html>")
             let response = GCDWebServerDataResponse(html:responseHTML)
-            completionBlock!(response)
+            completionBlock(response)
         }
         webServer.addHandler(forMethod: "GET", pathRegex: "/(.)+", request: GCDWebServerRequest.self) {
             (request, completionBlock) in
             var foundItem:VKMFileManagerItem?
-            let matchPath = request?.path.removingPercentEncoding!
-            self.delegate?.logStatus("Sending \(matchPath!).\n")
+            let matchPath = request.path.removingPercentEncoding!
+            self.delegate?.logStatus("Sending \(matchPath).\n")
             var response: GCDWebServerFileResponse
             if let i = self.dataArray.index(where: { $0.clientURL?.path == matchPath }) {
                 foundItem = self.dataArray[i]
 //                self.delegate?.logStatus("Sending \(self.dataArray[i].fileName).\n")
-                response = GCDWebServerFileResponse(file: foundItem?.path, isAttachment: true)
+                response = GCDWebServerFileResponse(file: foundItem!.path, isAttachment: true)!
             } else {
                 self.delegate?.logStatus("Error: Console asked for a file that was not added.\n")
                 response = GCDWebServerFileResponse(statusCode: 404)
             }
-            completionBlock!(response)
+            completionBlock(response)
         }
     }
     
@@ -104,11 +105,11 @@ class VKMFileManager: NSObject, VKMFileDropDelegate {
 
 @objc(VKMFileManagerItem)
 class VKMFileManagerItem : NSObject {
-    public var isUrl:Bool = false
-    public var fileName:String = ""
-    public var path:String = ""
-    public var size:Int = 0
-    public var clientURL = URL(string: "/")
+   @objc public var isUrl:Bool = false
+   @objc public var fileName:String = ""
+   @objc public var path:String = ""
+   @objc public var size:Int = 0
+   @objc public var clientURL = URL(string: "/")
     
     init(isUrl:Bool, path:String) {
         let fd = FileManager.default
