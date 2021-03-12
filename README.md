@@ -2,7 +2,7 @@
 Mac app to graphically send CIAs to your 3DS running FBI. Extra features over servefiles and Boop.
 
 ![Screenshot of 3DS FBI Link in action](/../media/3dsFBILink.png?raw=true "Screenshot")
-##Updates (2021-3-13)
+## Updates (2021-3-13)
 * Minor fix for Swift 5.
 * Universal Binary support for Apple Silicon like M1. Not fully tested.
 * Support Dark mode. Not pefectly well displayed if appearance mode changes while running.
