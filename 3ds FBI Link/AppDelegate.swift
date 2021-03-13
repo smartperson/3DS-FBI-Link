@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func application(_ sender: NSApplication, openFiles filenames: [String]) {
         print("Open all the files! \(filenames)")
-        (NSApplication.shared().mainWindow?.contentView as! VKMFullView).delegate!.received(files: filenames)
+        (NSApplication.shared.mainWindow?.contentView as! VKMFullView).delegate!.received(files: filenames)
         return
     }
 }

@@ -1,19 +1,22 @@
 PODS:
-  - CocoaAsyncSocket (7.5.1):
-    - CocoaAsyncSocket/GCD (= 7.5.1)
-  - CocoaAsyncSocket/GCD (7.5.1)
-  - GCDWebServer (3.3.3):
-    - GCDWebServer/Core (= 3.3.3)
-  - GCDWebServer/Core (3.3.3)
+  - CocoaAsyncSocket (7.6.5)
+  - GCDWebServer (3.5.4):
+    - GCDWebServer/Core (= 3.5.4)
+  - GCDWebServer/Core (3.5.4)
 
 DEPENDENCIES:
   - CocoaAsyncSocket
   - GCDWebServer
 
+SPEC REPOS:
+  trunk:
+    - CocoaAsyncSocket
+    - GCDWebServer
+
 SPEC CHECKSUMS:
-  CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
-  GCDWebServer: 1c39a1f0763e4eb492bee021e4270fce097d3555
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
 
-PODFILE CHECKSUM: 6c7acb62b5945cb01219270bbee5fdcb49ef0682
+PODFILE CHECKSUM: ffee30bd3a91fc1398c7750acfbdfa33b0ebf8fc
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.10.1
