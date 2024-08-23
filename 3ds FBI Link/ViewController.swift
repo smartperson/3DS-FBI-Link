@@ -9,6 +9,21 @@
 import Cocoa
 import CocoaAsyncSocket
 
+func ifDarkMode(view:NSView)->Bool{
+    let x = view.effectiveAppearance.name
+    if x == .aqua {
+        print(x)
+    } else {
+        print(x)
+    }
+    if #available(OSX 10.14, *) {
+        return x == .darkAqua
+    } else {
+       return false
+    }
+}
+      
+
 @objc(ViewController)
 class ViewController: NSViewController, ConsoleManagementDelegate, VKMLoggingDelegate {
     @IBOutlet weak var consoleManager:VKMConsoleManager?
@@ -18,7 +33,8 @@ class ViewController: NSViewController, ConsoleManagementDelegate, VKMLoggingDel
     
     var logView:NSTextView {
         get {
-            return self.logScrollView?.contentView.documentView as! NSTextView
+            let view = self.logScrollView?.contentView.documentView as! NSTextView
+            return view
         }
     }
     
@@ -26,9 +42,14 @@ class ViewController: NSViewController, ConsoleManagementDelegate, VKMLoggingDel
         
     }
     
-    public var status = NSMutableDictionary()
+    @objc public var status = NSMutableDictionary()
 
+    @objc func interfaceModeChanged(sender: NSNotification) {
+      
+    }
     override func viewDidLoad() {
+        DistributedNotificationCenter.default.addObserver(self, selector: #selector(interfaceModeChanged(sender:)), name: NSNotification.Name(rawValue: "AppleInterfaceThemeChangedNotification"), object: nil)
+
         NSLog("Hi")
         dragView?.delegate = fileManager
         consoleManager?.delegate = self
@@ -60,7 +81,11 @@ class ViewController: NSViewController, ConsoleManagementDelegate, VKMLoggingDel
     }
     
     func logViewString(_ string: String) {
+
         logView.textStorage?.append(NSAttributedString(string: string))
+        if ifDarkMode(view: logView) {
+            logView.textColor = .white
+        }
     }
     
     override var representedObject: Any? {

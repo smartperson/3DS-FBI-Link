@@ -18,8 +18,8 @@ protocol ConsoleManagementDelegate {
 
 @objc(ConsoleManagerItem)
 class ConsoleManagerItem:NSObject {
-    public var ipAddress:String = "0.0.0.0"
-    public var port:UInt16 = 5000
+    @objc public var ipAddress:String = "0.0.0.0"
+    @objc public var port:UInt16 = 5000
     
     override init() {
         self.ipAddress = "0.0.0.0"
@@ -37,14 +37,14 @@ class ConsoleManagerItem:NSObject {
 @objc(VKMConsoleManager)
 class VKMConsoleManager: NSObject, GCDAsyncSocketDelegate, NSTableViewDataSource {
     public var delegate: ConsoleManagementDelegate?
-    var dataArray:[ConsoleManagerItem] = [ConsoleManagerItem]()
-    var sockets = [GCDAsyncSocket]()
+    @objc var dataArray:[ConsoleManagerItem] = [ConsoleManagerItem]()
+    @objc var sockets = [GCDAsyncSocket]()
     override init() {
         super.init()
         self.performSelector(inBackground: #selector(self.detectConsoles), with: self)
     }
     
-    func detectConsoles(sender: Any) {
+    @objc func detectConsoles(sender: Any) {
         // Create a Task instance
         let task = Process()
         
