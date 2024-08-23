@@ -39,7 +39,7 @@ class VKMFileManager: NSObject, VKMFileDropDelegate {
             let matchPath = request.path.removingPercentEncoding!
             self.delegate?.logStatus("Sending \(matchPath).\n")
             var response: GCDWebServerFileResponse
-            if let i = self.dataArray.index(where: { $0.clientURL?.path == matchPath }) {
+            if let i = self.dataArray.firstIndex(where: { $0.clientURL?.path == matchPath }) {
                 foundItem = self.dataArray[i]
 //                self.delegate?.logStatus("Sending \(self.dataArray[i].fileName).\n")
                 response = GCDWebServerFileResponse(file: foundItem!.path, isAttachment: true)!
@@ -93,7 +93,7 @@ class VKMFileManager: NSObject, VKMFileDropDelegate {
     func startServing() -> Bool {
         NSLog("Hi")
         self.webServer.start(withPort: 0, bonjourName: "3DS FBI Link")
-        self.delegate?.logStatus("You can inspect the files list at \(webServer.serverURL)\n")
+        self.delegate?.logStatus("You can inspect the files list at \(webServer.serverURL!)\n")
         return true
     }
     
